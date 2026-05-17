@@ -22,9 +22,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const client = await getSupabase()
-  const { data, error } = await client
-    .from('jobs')
-    .update(updates as any)
+  const { data, error } = await (client.from('jobs') as any)
+    .update(updates)
     .eq('id', id)
     .select()
     .single()
