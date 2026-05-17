@@ -1,5 +1,7 @@
+'use server'
+
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/db'
+import { getSupabase } from '@/lib/db'
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const body = await req.json()
@@ -19,7 +21,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'No valid fields to update' }, { status: 400 })
   }
 
-  const client = supabase()
+  const client = getSupabase()
   const { data, error } = await client
     .from('jobs')
     .update(updates)
@@ -38,7 +40,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   const { id: idStr } = await params
   const id = parseInt(idStr)
 
-  const client = supabase()
+  const client = getSupabase()
   const { error } = await client
     .from('jobs')
     .delete()

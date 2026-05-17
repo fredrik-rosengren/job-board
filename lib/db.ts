@@ -1,9 +1,11 @@
+'use server'
+
 import { createClient } from '@supabase/supabase-js'
 
-let supabase: ReturnType<typeof createClient> | null = null
+let supabaseInstance: ReturnType<typeof createClient> | null = null
 
 export function getSupabase() {
-  if (!supabase) {
+  if (!supabaseInstance) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
@@ -11,12 +13,10 @@ export function getSupabase() {
       throw new Error('Missing Supabase credentials')
     }
 
-    supabase = createClient(supabaseUrl, supabaseKey)
+    supabaseInstance = createClient(supabaseUrl, supabaseKey)
   }
-  return supabase
+  return supabaseInstance
 }
-
-export { getSupabase as supabase }
 
 export type { Job } from './types'
 export { STAGES } from './types'
