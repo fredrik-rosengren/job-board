@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/db'
 
-// Trigger rebuild
-
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const body = await req.json()
   const { id: idStr } = await params
@@ -40,8 +38,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   const id = parseInt(idStr)
 
   const client = await getSupabase()
-  const { error } = await client
-    .from('jobs')
+  const { error } = await (client.from('jobs') as any)
     .delete()
     .eq('id', id)
 

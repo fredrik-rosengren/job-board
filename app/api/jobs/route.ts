@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const q = searchParams.get('q')
 
   const client = await getSupabase()
-  let query = client.from('jobs').select('*')
+  let query = (client.from('jobs') as any).select('*')
 
   if (stage) {
     query = query.eq('stage', stage)
@@ -35,8 +35,7 @@ export async function POST(req: NextRequest) {
   }
 
   const client = await getSupabase()
-  const { data, error } = await client
-    .from('jobs')
+  const { data, error } = await (client.from('jobs') as any)
     .insert([
       {
         title,
