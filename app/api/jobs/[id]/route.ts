@@ -19,7 +19,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'No valid fields to update' }, { status: 400 })
   }
 
-  const { data, error } = await supabase
+  const client = supabase()
+  const { data, error } = await client
     .from('jobs')
     .update(updates)
     .eq('id', id)
@@ -37,7 +38,8 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   const { id: idStr } = await params
   const id = parseInt(idStr)
 
-  const { error } = await supabase
+  const client = supabase()
+  const { error } = await client
     .from('jobs')
     .delete()
     .eq('id', id)
