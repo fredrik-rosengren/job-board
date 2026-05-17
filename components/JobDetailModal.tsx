@@ -142,7 +142,7 @@ export default function JobDetailModal({ job, onClose, onUpdate }: Props) {
           <div>
             <label className="text-xs font-medium text-gray-600">Beskrivning</label>
             <textarea
-              className="input mt-1 h-24 resize-none"
+              className="input mt-1 h-40 resize-none"
               value={form.description || ''}
               onChange={e => setForm(f => ({ ...f, description: e.target.value || null }))}
             />
@@ -151,7 +151,7 @@ export default function JobDetailModal({ job, onClose, onUpdate }: Props) {
           <div>
             <label className="text-xs font-medium text-gray-600">📝 Anteckningar (fri text)</label>
             <textarea
-              className="input mt-1 h-32 resize-none focus:ring-yellow-400 border-yellow-300 focus:border-yellow-300"
+              className="input mt-1 h-64 resize-none focus:ring-yellow-400 border-yellow-300 focus:border-yellow-300"
               placeholder="Lägg till egna anteckningar, tankar, intervjunsvar..."
               value={form.notes || ''}
               onChange={e => setForm(f => ({ ...f, notes: e.target.value || null }))}
