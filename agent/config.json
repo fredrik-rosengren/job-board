@@ -1,0 +1,31 @@
+{
+  "profile": {
+    "name": "Gustav Rosengren",
+    "titles": [
+      "Junior assistent", "Ekonomiassistent", "Analytiker junior",
+      "Trainee ekonomi", "Affärsutveckling junior", "Sommarjobb ekonomi",
+      "Junior konsult", "Kontorsassistent"
+    ],
+    "skills": ["Excel", "analys", "ekonomi", "försäljning", "matematik", "engelska", "AI-verktyg"],
+    "location": "Stockholm",
+    "remote": false,
+    "minSalary": 0,
+    "experienceYears": 0,
+    "description": "Gymnasieelev (International ekonomi + tekniskt basår, Tibble) som tar studenten 2026 och letar ett sabbatsår innan civilingenjör industriell ekonomi. Högskoleprov 1.75/2.0 (kvant 2.0/2.0). Driven, analytisk, entreprenöriell — driver eget bolag (getfrostguard.com), UF-företag, mattehandledning. Stark i Excel och analys. Intressen: finans, aktier, fastigheter. Söker juniorroll inom ekonomi, konsulting, finans eller affärsutveckling i Stockholm aug 2026."
+  },
+  "search": {
+    "keywords": [
+      "junior assistent ekonomi stockholm",
+      "trainee ekonomi stockholm 2026",
+      "ekonomiassistent junior stockholm",
+      "junior analytiker stockholm",
+      "assistent konsultbolag stockholm"
+    ],
+    "maxJobsPerRun": 50,
+    "minScore": 35,
+    "sites": ["arbetsformedlingen", "linkedin", "indeed"]
+  },
+  "api": {
+    "jobBoardUrl": "http://localhost:3000"
+  }
+}
