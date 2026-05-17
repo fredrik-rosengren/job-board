@@ -7,7 +7,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const id = parseInt(idStr)
 
   const allowed = ['title', 'company', 'location', 'url', 'description', 'score', 'stage', 'relevant', 'notes', 'salary', 'deadline']
-  const updates: Record<string, unknown> = {}
+  const updates: Record<string, any> = {}
 
   Object.entries(body).forEach(([key, val]) => {
     if (allowed.includes(key)) {
