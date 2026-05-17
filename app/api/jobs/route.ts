@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const stage = searchParams.get('stage')
   const q = searchParams.get('q')
 
-  const client = getSupabase()
+  const client = await getSupabase()
   let query = client.from('jobs').select('*')
 
   if (stage) {
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'title and company are required' }, { status: 400 })
   }
 
-  const client = getSupabase()
+  const client = await getSupabase()
   const { data, error } = await client
     .from('jobs')
     .insert([
