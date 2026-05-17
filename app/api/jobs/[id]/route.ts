@@ -6,7 +6,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { id: idStr } = await params
   const id = parseInt(idStr)
 
-  const allowed = ['title', 'company', 'location', 'url', 'description', 'score', 'stage', 'relevant', 'notes', 'salary', 'deadline']
+  const allowed = ['title', 'company', 'location', 'url', 'description', 'score', 'stage', 'relevant', 'notes', 'salary', 'deadline', 'education_level']
   const updates: Record<string, any> = {}
 
   Object.entries(body).forEach(([key, val]) => {

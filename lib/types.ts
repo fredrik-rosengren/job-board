@@ -11,6 +11,8 @@ export type Job = {
   notes: string | null
   source: string | null
   salary: string | null
+  deadline: string | null
+  education_level: string | null
   created_at: string
   updated_at: string
 }

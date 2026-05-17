@@ -8,9 +8,11 @@ type Props = {
   onAdded: (job: Job) => void
 }
 
+const EDUCATION_LEVELS = ['Grundskola', 'Gymnasium', 'Högskola', 'Mastergrad', 'Övrigt']
+
 export default function AddJobModal({ onClose, onAdded }: Props) {
   const [form, setForm] = useState({
-    title: '', company: '', location: '', url: '', salary: '', score: '50', description: '', notes: ''
+    title: '', company: '', location: '', url: '', salary: '', score: '50', description: '', notes: '', source: '', deadline: '', education_level: ''
   })
   const [saving, setSaving] = useState(false)
 
@@ -29,8 +31,8 @@ export default function AddJobModal({ onClose, onAdded }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
-        <div className="p-5 border-b flex justify-between items-center">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="p-5 border-b flex justify-between items-center sticky top-0 bg-white">
           <h2 className="font-semibold text-lg">Lägg till jobb</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl">×</button>
         </div>
@@ -55,9 +57,28 @@ export default function AddJobModal({ onClose, onAdded }: Props) {
               <input className="input" placeholder="t.ex. 60 000 kr/mån" value={form.salary} onChange={e => setForm(f => ({ ...f, salary: e.target.value }))} />
             </div>
           </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-medium text-gray-600">Deadline</label>
+              <input type="date" className="input" value={form.deadline} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-gray-600">Utbildningsnivå</label>
+              <select className="input" value={form.education_level} onChange={e => setForm(f => ({ ...f, education_level: e.target.value }))}>
+                <option value="">Välj nivå</option>
+                {EDUCATION_LEVELS.map(level => (
+                  <option key={level} value={level}>{level}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           <div>
             <label className="text-xs font-medium text-gray-600">URL</label>
             <input className="input" type="url" value={form.url} onChange={e => setForm(f => ({ ...f, url: e.target.value }))} />
+          </div>
+          <div>
+            <label className="text-xs font-medium text-gray-600">Källa (LinkedIn, Arbetsförmedlingen, etc.)</label>
+            <input className="input" value={form.source} onChange={e => setForm(f => ({ ...f, source: e.target.value }))} />
           </div>
           <div>
             <label className="text-xs font-medium text-gray-600">Match-score: {form.score}/100</label>

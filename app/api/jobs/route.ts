@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { title, company, location, url, description, score, stage, notes, source, salary, deadline } = body
+  const { title, company, location, url, description, score, stage, notes, source, salary, deadline, education_level } = body
 
   if (!title || !company) {
     return NextResponse.json({ error: 'title and company are required' }, { status: 400 })
@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
         source: source ?? null,
         salary: salary ?? null,
         deadline: deadline ?? null,
+        education_level: education_level ?? null,
       },
     ])
     .select()

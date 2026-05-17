@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Job } from '@/lib/types'
 import JobCard from '@/components/JobCard'
 import KanbanBoard from '@/components/KanbanBoard'
@@ -48,6 +49,9 @@ export default function Home() {
       <header className="bg-white border-b shadow-sm sticky top-0 z-10">
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
           <h1 className="text-lg font-bold text-indigo-700 mr-2">Job Board</h1>
+          <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 font-medium">
+            📊 Dashboard
+          </Link>
           <input
             type="text"
             placeholder="Sök titel eller företag…"
