@@ -8,9 +8,10 @@ type Props = {
   job: Job
   onUpdate: (job: Job) => void
   onDelete: (id: number) => void
+  onDetailOpen?: (job: Job) => void
 }
 
-export default function JobCard({ job, onUpdate, onDelete }: Props) {
+export default function JobCard({ job, onUpdate, onDelete, onDetailOpen }: Props) {
   const [showNotes, setShowNotes] = useState(false)
   const [editingNotes, setEditingNotes] = useState(job.notes || '')
 
@@ -42,7 +43,10 @@ export default function JobCard({ job, onUpdate, onDelete }: Props) {
   }
 
   return (
-    <div className={`bg-white rounded-lg border shadow-sm p-4 space-y-2 ${job.relevant ? 'border-green-400' : 'border-gray-200'}`}>
+    <div
+      onDoubleClick={() => onDetailOpen?.(job)}
+      className={`bg-white rounded-lg border shadow-sm p-4 space-y-2 cursor-pointer transition-colors hover:shadow-md ${job.relevant ? 'border-green-400' : 'border-gray-200'}`}
+    >
       <div className="flex justify-between items-start gap-2">
         <div>
           <p className="font-semibold text-sm leading-tight">{job.title}</p>

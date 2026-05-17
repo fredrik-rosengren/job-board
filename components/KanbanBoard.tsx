@@ -8,6 +8,7 @@ type Props = {
   jobs: Job[]
   onUpdate: (job: Job) => void
   onDelete: (id: number) => void
+  onDetailOpen?: (job: Job) => void
 }
 
 const STAGE_COLORS: Record<string, string> = {
@@ -18,7 +19,7 @@ const STAGE_COLORS: Record<string, string> = {
   rejected: 'bg-red-50',
 }
 
-export default function KanbanBoard({ jobs, onUpdate, onDelete }: Props) {
+export default function KanbanBoard({ jobs, onUpdate, onDelete, onDetailOpen }: Props) {
   async function onDragEnd(result: DropResult) {
     if (!result.destination) return
     const jobId = parseInt(result.draggableId)
@@ -59,7 +60,8 @@ export default function KanbanBoard({ jobs, onUpdate, onDelete }: Props) {
                             ref={drag.innerRef}
                             {...drag.draggableProps}
                             {...drag.dragHandleProps}
-                            className={`bg-white rounded-lg border p-3 shadow-sm space-y-1.5 cursor-grab active:cursor-grabbing transition-shadow ${
+                            onDoubleClick={() => onDetailOpen?.(job)}
+                            className={`bg-white rounded-lg border p-3 shadow-sm space-y-1.5 cursor-grab active:cursor-grabbing transition-shadow hover:shadow-md ${
                               dragSnapshot.isDragging ? 'shadow-lg ring-2 ring-indigo-400' : job.relevant ? 'border-green-400' : 'border-gray-200'
                             }`}
                           >

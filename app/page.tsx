@@ -6,6 +6,7 @@ import { Job } from '@/lib/types'
 import JobCard from '@/components/JobCard'
 import KanbanBoard from '@/components/KanbanBoard'
 import AddJobModal from '@/components/AddJobModal'
+import JobDetailModal from '@/components/JobDetailModal'
 
 type View = 'list' | 'kanban'
 
@@ -18,6 +19,7 @@ export default function Home() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [view, setView] = useState<View>('kanban')
   const [showAdd, setShowAdd] = useState(false)
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null)
   const [search, setSearch] = useState('')
   const [filterStage, setFilterStage] = useState('')
   const [filterRelevant, setFilterRelevant] = useState(false)
@@ -92,7 +94,7 @@ export default function Home() {
 
       <main className="max-w-screen-xl mx-auto px-4 py-6">
         {view === 'kanban' ? (
-          <KanbanBoard jobs={filtered} onUpdate={updateJob} onDelete={deleteJob} />
+          <KanbanBoard jobs={filtered} onUpdate={updateJob} onDelete={deleteJob} onDetailOpen={setSelectedJob} />
         ) : (
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.length === 0 && (
@@ -101,13 +103,23 @@ export default function Home() {
               </div>
             )}
             {filtered.map(job => (
-              <JobCard key={job.id} job={job} onUpdate={updateJob} onDelete={deleteJob} />
+              <JobCard key={job.id} job={job} onUpdate={updateJob} onDelete={deleteJob} onDetailOpen={setSelectedJob} />
             ))}
           </div>
         )}
       </main>
 
       {showAdd && <AddJobModal onClose={() => setShowAdd(false)} onAdded={j => setJobs(jobs => [j, ...jobs])} />}
+      {selectedJob && (
+        <JobDetailModal
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+          onUpdate={job => {
+            updateJob(job)
+            setSelectedJob(job)
+          }}
+        />
+      )}
     </div>
   )
 }
